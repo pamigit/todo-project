@@ -7,7 +7,7 @@
                   <form>
                       <div class="form-group">
                           <label for="todoitem">Todo Item</label>
-                          <input type="text" v-model="input" class="form-control" id="todoitem" placeholder="Todo Item" />
+                          <input type="text" v-model="input.text" class="form-control" id="todoitem" placeholder="Todo Item" />
                       </div><br>
                       <button type="button" v-on:click="add()" class="btn btn-default">Create</button>
                   </form>
@@ -18,8 +18,8 @@
           <div class="col-md-12">
               <h2>List</h2>
               <ul class="list-group">
-                  <li v-for="(todo, index) in todos" :key="index" class="list-group-item">
-                      {{ index }}: {{ todo }}
+                  <li v-for="(todo, index) in todos" :key="index" class="list-group-item" v-on:click="complete(index)" v-bind:class="{completeToDo: todo.isComplete}">
+                      {{ index }}: {{ todo.text }}
                   </li>
               </ul>
           </div>
@@ -33,13 +33,22 @@ export default {
     data () {
         return {
             todos: [],
-            input: ""
+            input: {}
         }
     },
     methods: {
         add() {
+            this.input.isComplete = false;
             this.todos.push(this.input);
-            this.input = "";
+            this.input = {};
+        },
+        complete(index) {
+          for(var i=0; i<this.todos.length; i++){
+            if(i==index) {
+              this.todos[index].isComplete=true;
+            }
+          }
+          this.input = {};
         }
     }
 }
@@ -55,10 +64,13 @@ ul {
   padding: 0;
 }
 li {
-  display: inline-block;
-  margin: 0 10px;
+  /*display: inline-block;*/
+  margin: 10px 10px;
 }
 a {
   color: #42b983;
+}
+.completeToDo {
+  text-decoration: line-through;
 }
 </style>
