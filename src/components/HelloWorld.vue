@@ -19,7 +19,7 @@
               <h2>List</h2>
               <ul class="list-group">
                   <li v-for="(todo, index) in todos" :key="index" class="list-group-item" v-on:click="complete(index)" v-bind:class="{completeToDo: todo.isComplete}">
-                      {{ index + 1 }} : {{ todo.text }}, Hello!!!
+                      {{ index + 1 }} : {{ todo.text }}
                   </li>
               </ul>
           </div>
