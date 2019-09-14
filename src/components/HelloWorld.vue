@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
       <div class="row">
           <div class="col-md-12">
               <div class="well">
@@ -8,8 +8,8 @@
                       <div class="form-group">
                           <label for="todoitem">Todo Item</label>
                           <input type="text" v-model="input.text" class="form-control" id="todoitem" placeholder="Todo Item" />
-                      </div><br>
-                      <button type="button" v-on:click="add()" class="btn btn-default">Create</button>
+                      </div>
+                      <button type="button" v-on:click="add()" class="btn btn-success">Create</button><br>
                   </form>
               </div>
           </div>
@@ -18,7 +18,7 @@
           <div class="col-md-12">
               <h2>List</h2>
               <ul class="list-group">
-                  <li v-for="(todo, index) in todos" :key="index" class="list-group-item" v-on:click="complete(index)" v-bind:class="{completeToDo: todo.isComplete}">
+                  <li v-for="(todo, index) in todos" :key="index" class="list-group-item list-group-item-success" v-on:click="complete(index)" v-bind:class= "{completeToDo: todo.isComplete}" >
                       {{ index + 1 }} : {{ todo.text }}
                   </li>
               </ul>
@@ -65,12 +65,16 @@ ul {
 }
 li {
   /*display: inline-block;*/
-  margin: 10px 10px;
+  margin: 5px 5px;
+  text-align: left;
 }
 a {
   color: #42b983;
 }
 .completeToDo {
   text-decoration: line-through;
+}
+.row {
+  padding-top: 25px;
 }
 </style>
